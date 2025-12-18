@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>云乐音乐播放器</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- 播放器主区域 -->
+        <div class="player-container">
+            <!-- 专辑封面区域 -->
+            <div class="album-section">
+                <div class="album-cover-container">
+                    <img src="images/print1.jpg" alt="专辑封面" class="album-cover" id="album-cover">
+                    <div class="album-disc" id="album-disc">
+                        <div class="disc-center"></div>
+                    </div>
+                </div>
+                <div class="album-info">
+                    <h1 class="music-title" id="music-title">起风了</h1>
+                    <p class="music-artist" id="music-artist">卖辣椒也用卷</p>
+                    <p class="music-album" id="music-album"></p>
+                </div>
+            </div>
+
+            <!-- 播放控制区域 -->
+            <div class="control-section">
+                <!-- 进度条 -->
+                <div class="progress-container">
+                    <span class="time-label" id="current-time">0:00</span>
+                    <div class="progress-bar" id="progress-bar">
+                        <div class="progress" id="progress"></div>
+                        <div class="progress-handle" id="progress-handle"></div>
+                    </div>
+                    <span class="time-label" id="duration">0:00</span>
+                </div>
+
+                <!-- 控制按钮 -->
+                <div class="control-buttons">
+                    <button class="control-btn" id="repeat-btn" title="播放模式">
+                        <i class="fas fa-redo"></i>
+                    </button>
+                    <button class="control-btn" id="prev-btn" title="上一曲">
+                        <i class="fas fa-step-backward"></i>
+                    </button>
+                    <button class="control-btn play-pause" id="play-pause-btn" title="播放/暂停">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <button class="control-btn" id="next-btn" title="下一曲">
+                        <i class="fas fa-step-forward"></i>
+                    </button>
+                    <button class="control-btn" id="playlist-toggle-btn" title="播放列表">
+                        <i class="fas fa-list"></i>
+                    </button>
+                </div>
+
+                <!-- 底部控制区域（音量、倍速等） -->
+                <div class="extra-controls">
+                    <!-- 音量控制 -->
+                    <div class="volume-container">
+                        <button class="volume-btn" id="volume-btn">
+                            <i class="fas fa-volume-up"></i>
+                        </button>
+                        <div class="volume-bar" id="volume-bar">
+                            <div class="volume-level" id="volume-level"></div>
+                        </div>
+                    </div>
+
+                    <!-- 倍速控制 -->
+                    <div class="speed-control">
+                        <button class="speed-toggle" id="speed-toggle" title="播放速度">
+                            <span id="speed-display">1.0x</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="speed-menu" id="speed-menu">
+                            <button class="speed-option" data-speed="0.5">0.5x</button>
+                            <button class="speed-option" data-speed="0.75">0.75x</button>
+                            <button class="speed-option active" data-speed="1.0">1.0x</button>
+                            <button class="speed-option" data-speed="1.25">1.25x</button>
+                            <button class="speed-option" data-speed="1.5">1.5x</button>
+                            <button class="speed-option" data-speed="1.75">1.75x</button>
+                            <button class="speed-option" data-speed="2.0">2.0x</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 播放列表区域 -->
+            <div class="playlist-section">
+                <div class="playlist-header">
+                    <h2><i class="fas fa-music"></i> 播放列表</h2>
+                    <span class="playlist-count" id="playlist-count">5首歌曲</span>
+                </div>
+                <div class="playlist-content" id="playlist-content">
+                    <!-- 播放列表项将通过JS动态生成 -->
+                </div>
+            </div>
+        </div>
+
+        <!-- 音频元素 -->
+        <audio id="audio-player" preload="metadata"></audio>
+
+        <!-- 时间跳转对话框 -->
+        <div class="time-jump-dialog" id="time-jump-dialog">
+            <div class="dialog-content">
+                <h3>跳转到指定时间</h3>
+                <div class="time-input">
+                    <input type="number" id="jump-minute" min="0" max="59" placeholder="分" value="0">
+                    <span>:</span>
+                    <input type="number" id="jump-second" min="0" max="59" placeholder="秒" value="0">
+                </div>
+                <div class="dialog-buttons">
+                    <button class="dialog-btn" id="jump-cancel">取消</button>
+                    <button class="dialog-btn primary" id="jump-confirm">跳转</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 引入脚本 -->
+    <script src="player.js"></script>
+</body>
+</html>
